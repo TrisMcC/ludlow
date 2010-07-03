@@ -1,0 +1,3 @@
+[submodule "lib/biggie-router"]
+	path = lib/biggie-router
+	url = http://github.com/biggie/biggie-router.git
