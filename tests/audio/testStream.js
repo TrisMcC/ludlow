@@ -10,19 +10,14 @@ router.get('/').bind(function(request, response, next) {
 
 router.get('/ogg').bind(function(request, response, next) {
 
-    response.writeHead(200, {
-        'Transfer-Encoding': 'chunked',
-        'Content-Type': 'audio/ogg'
-    });
+    response.writeHead(200, {'Content-Type': 'audio/ogg'});
 
     var stream = fs.createReadStream('eleanor-rigby-sample.ogg');
 
-    stream.addListener('data', function(chunk) {
-       response.write(chunk, 'binary'); 
-    }).addListener('end', function() {
-        response.end();
+    sys.pump(stream, response, function () {
+        console.log('done');
     });
 })
 
-router.listen(8080);
+router.listen(8000);
 
